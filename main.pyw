@@ -49,8 +49,8 @@ def get_code(message):
     sti = open('github.png', 'rb')
     bot.send_sticker(message.chat.id, sti)
     bot.send_message(message.chat.id,
-                     '[l1nt3x/pc_control_telegram_bot](https://github.com/l1nt3x/pc_control_telegram_bot)',
-                     parse_mode='MarkdownV2')
+                     '<a href="https://github.com/l1nt3x/pc_control_telegram_bot">l1nt3x/pc_control_telegram_bot</a>',
+                     parse_mode='html')
 
 
 @bot.message_handler(content_types=['text'])
