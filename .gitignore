@@ -1,4 +1,3 @@
 config.py
 pc_control_telegram_bot_start.cmd
 venv/
-*.gitignore
