@@ -3,6 +3,7 @@ from time import time
 
 import telebot
 from infi.systray import SysTrayIcon
+
 from config import ID, TOKEN
 
 bot = telebot.TeleBot(TOKEN)
@@ -41,6 +42,15 @@ def welcome(message):
                      "Добро пожаловать, {0.first_name}!\nЯ - <b>{1.first_name}</b>, бот созданный для управления Вашим компьютером с помощью Telegram".format(
                          message.from_user, bot.get_me()),
                      parse_mode='html', reply_markup=markup)
+
+
+@bot.message_handler(commands=['code'])
+def get_code(message):
+    sti = open('github.png', 'rb')
+    bot.send_sticker(message.chat.id, sti)
+    bot.send_message(message.chat.id,
+                     '[l1nt3x/pc_control_telegram_bot](https://github.com/l1nt3x/pc_control_telegram_bot)',
+                     parse_mode='MarkdownV2')
 
 
 @bot.message_handler(content_types=['text'])
