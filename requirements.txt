@@ -1,0 +1,8 @@
+certifi
+charset-normalizer
+idna
+infi.systray
+PySocks
+pyTelegramBotAPI
+requests
+urllib3
