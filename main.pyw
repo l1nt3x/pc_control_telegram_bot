@@ -1,15 +1,29 @@
 import os
 from time import time
-
+import ctypes
 import telebot
 from infi.systray import SysTrayIcon
 
-from config import ID, TOKEN
+try:
+    from bot_config import ID, TOKEN, ICON_ICO, ICON_PNG
+except Exception as e:
+    print(e)
+    bot_config_file = open('bot_config.py', 'w')
+    bot_config_file.write("TOKEN = 'https://t.me/BotFather'\n")
+    bot_config_file.write("ID = 'https://t.me/username_to_id_bot'\n")
+    bot_config_file.write("ICON_ICO = 'iconname.ico'\n")
+    bot_config_file.write("ICON_PNG = 'iconname.png'\n")
+    ctypes.windll.user32.MessageBoxW(0, "NO CONFIG DEFINED! PLEASE EDIT bot_config.py", "WARNING!", 1)
+    quit()
+
+if ID == 'https://t.me/username_to_id_bot' or TOKEN == 'https://t.me/BotFather' or ICON_PNG == 'iconname.png' or ICON_ICO == 'iconname.ico':
+    ctypes.windll.user32.MessageBoxW(0, "NO CONFIG DEFINED! PLEASE EDIT bot_config.py", "WARNING!", 1)
+    quit()
 
 bot = telebot.TeleBot(TOKEN)
 
 TOKEN = TOKEN
-ID = ID
+ID = int(ID)
 
 action = {
     'state': False,
@@ -31,7 +45,7 @@ markup.add(item3)
 def welcome(message):
     global ID
     global markup
-    sti = open('seal.png', 'rb')
+    sti = open(ICON_PNG, 'rb')
     bot.send_sticker(message.chat.id, sti)
     user_id = message.from_user.id
 
@@ -118,7 +132,7 @@ def on_quit_callback():
     bot.stop_polling()
 
 
-systray = SysTrayIcon("seal.ico", "PC Control Telegram BOT", on_quit=on_quit_callback)
+systray = SysTrayIcon(ICON_ICO, "PC Control Telegram BOT", on_quit=on_quit_callback)
 
 # RUN
 if __name__ == '__main__':
