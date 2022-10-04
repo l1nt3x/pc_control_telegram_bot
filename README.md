@@ -13,7 +13,7 @@
 ### Prerequisites
 
 1. Python 3
-2. ```pip install requirements.txt```
+2. ```pip install -r requirements.txt```
 
 ### How to start
 
